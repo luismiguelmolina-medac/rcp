@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Día Mundial de la Reanimación Cardiopulmonar (RCP)</title>
     <style>
@@ -9,7 +10,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffa7a6; /* Fondo para contraste */
+            background-color: #ffa7a6;
+            /* Fondo para contraste */
         }
 
         .corazon {
@@ -47,9 +49,11 @@
             0% {
                 transform: rotate(-45deg) scale(1);
             }
+
             50% {
                 transform: rotate(-45deg) scale(0.95);
             }
+
             100% {
                 transform: rotate(-45deg) scale(1);
             }
@@ -59,14 +63,16 @@
         .corazon:hover,
         .corazon:hover::before,
         .corazon:hover::after {
-            background-color: #8B0000; /* Rojo claro al pasar el ratón */
+            background-color: #8B0000;
+            /* Rojo claro al pasar el ratón */
         }
 
         /* Color rojo oscuro permanente tras el clic */
         .rojo-oscuro,
         .rojo-oscuro::before,
         .rojo-oscuro::after {
-            background-color:  #e94949; /* Rojo oscuro */
+            background-color: #e94949;
+            /* Rojo oscuro */
         }
 
         /* Cuando hacemos clic en la caja */
@@ -78,9 +84,11 @@
             0% {
                 transform: rotate(-45deg) scale(1);
             }
+
             50% {
                 transform: rotate(-45deg) scale(1.2);
             }
+
             100% {
                 transform: rotate(-45deg) scale(1);
             }
@@ -93,8 +101,10 @@
         /* Efecto de desaparecer */
         .oculto {
             opacity: 0;
-            pointer-events: none; /* Para que no se pueda volver a clicar */
-            animation: none; /* Corregido de 'nome' */
+            pointer-events: none;
+            /* Para que no se pueda volver a clicar */
+            animation: none;
+            /* Corregido de 'nome' */
         }
 
         h1 {
@@ -102,10 +112,12 @@
             font-family: Arial, sans-serif;
             margin-top: 40px;
             opacity: 0;
-            font-size: 6rem; /* Mucho más grande */
+            font-size: 6rem;
+            /* Mucho más grande */
             text-align: center;
             transition: opacity 2s ease, transform 1s ease;
-            transform: scale(0.5); /* Efecto zoom inicial */
+            transform: scale(0.5);
+            /* Efecto zoom inicial */
         }
 
         h1.mostrar {
@@ -114,9 +126,11 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="corazon"></div>
     <h1 id="mensaje">💖 ¡DIA INTERNACIONAL DEL RCP! 💖</h1>
+
+    <div class="corazon"></div>
 
     <script>
         const corazon = document.querySelector('.corazon');
@@ -150,4 +164,5 @@
         });
     </script>
 </body>
+
 </html>
