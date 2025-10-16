@@ -1,12 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="autor" content="John Precious">
-    <title>Document</title>
+  <title>Corazón Palpitante</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffa7a6;
+      /* Fondo para contraste */
+    }
+
+    .corazon {
+      position: absolute;
+      /*margin: auto;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;*/
+      width: 400px;
+      height: 400px;
+      background-color: red;
+      transform: rotate(-45deg);
+      animation: latido 1.5s infinite;
+      cursor: pointer;
+      transition: opacity 1.5s ease;
+    }
+
+
+    .corazon:before,
+    .corazon:after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background-color: red;
+      border-radius: 100%;
+    }
+
+    .corazon:before {
+      top: -200px;
+      left: 0;
+    }
+
+    .corazon:after {
+      top: 0;
+      left: 200px;
+    }
+
+    @keyframes latido {
+      0% {
+        transform: rotate(-45deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(-45deg) scale(0.95);
+      }
+
+      100% {
+        transform: rotate(-45deg) scale(1);
+      }
+    }
+
+    .corazon:hover,
+    .corazon:hover::before,
+    .corazon:hover::after {
+      /cuando pasamos el puntero por encima/
+      background-color: rgb(182, 3, 3);
+
+    }
+
+    /* Cuando hacemos click en la caja */
+    .corazon:active {
+      animation: latido-grande 0.3s ease;
+    }
+
+    @keyframes latido-grande {
+      0% {
+        transform: rotate(-45deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(-45deg) scale(1.2);
+      }
+
+      100% {
+        transform: rotate(-45deg) scale(1);
+      }
+    }
+
+    .latido-fuerte {
+      animation: latido-grande 0.3s ease;
+    }
+    /* Efecto de desaparecer */
+     .oculto {
+      opacity: 0;
+      pointer-events: none; /* para que no se pueda volver a clicar */
+      animation: nome;
+      /*transform: scale(0.5);
+      transition: transform 2s ease, opacity 2s ease;*/
+    }
+
+h1 {
+      color: white;
+      font-family: Arial, sans-serif;
+      margin-top: 40px;
+      opacity: 0;
+      font-size: 6rem; /* mucho más grande */
+      text-align: center;
+      transition: opacity 2s ease, transform 1s ease;
+      transform: scale(0.5); /* efecto zoom inicial */
+    }
+
+h1.mostrar{
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+  </style>
 </head>
+
 <body>
-    
+
+  <div class="corazon"></div>
+    <h1 id="mensaje">💖 ¡DIA INTERNACIONAL DEL RCP! 💖</h1>
+  
+
+  <script>
+    const corazon = document.querySelector('.corazon');
+    const mensaje = document.getElementById('mensaje');
+    let clics = 0;
+
+    corazon.addEventListener('click', () => {
+      // Latido fuerte
+      corazon.classList.add('latido-fuerte');
+      setTimeout(() => corazon.classList.remove('latido-fuerte'), 300);
+
+      // Contar clics
+      clics++;
+
+      if (clics === 5) {
+        corazon.classList.add('oculto'); // Desaparece el corazón
+
+        // Mostrar texto
+        setTimeout(() => {
+          mensaje.classList.add('mostrar');
+
+          // Redirigir después de 5 segundos
+          setTimeout(() => {
+            window.location.href = "rcp.html"; // <-- Cambia por la URL que quieras
+          }, 3000); // 5000ms = 5 segundos
+        }, 800); // retraso para que el corazón desaparezca primero
+      }
+    });
+  </script>
+
+  
 </body>
+
 </html>
