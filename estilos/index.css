@@ -1,0 +1,44 @@
+<style>
+    
+.corazon {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  transform: rotate(-45deg);
+  animation: latido 1s infinite;
+}
+
+.corazon:before,
+.corazon:after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  border-radius: 100%;
+}
+
+.corazon:before {
+  top: -100px;
+  left: 0;
+}
+
+.corazon:after {
+  top: 0;
+  left: 100px;
+}
+
+@keyframes latido {
+  0% { transform: rotate(-45deg) scale(1); }
+  50% { transform: rotate(-45deg) scale(0.67); }
+  100% { transform: rotate(-45deg) scale(1); }
+}
+
+
+</style>
