@@ -1,12 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Mario González">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario RCP</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #ffa7a6);
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffffcc;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="submit"],
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    input[type="submit"]:hover,
+    button:hover {
+      background-color: #45a049;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 20px auto;
+      max-width: 100%;
+    }
+
+    .disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+  </style>
 </head>
 <body>
-    
+  <img id="mainGif" src="https://media.tenor.com/Ou58OPjLMuMAAAAi/mivkbp-first-aid.gif" alt="GIF principal" />
+
+  <h2>Formulario básico sobre RCP</h2>
+  <form id="rcpForm">
+    <label for="q1">1. ¿Qué significan las siglas RCP?</label>
+    <select id="q1" name="q1">
+      <option value="">Selecciona una opción</option>
+      <option value="reanimación cardiopulmonar">Reanimación cardiopulmonar</option>
+      <option value="respiración consciente profunda">Respiración consciente profunda</option>
+      <option value="respuesta cardíaca primaria">Respuesta cardíaca primaria</option>
+    </select>
+
+    <label for="q2">2. ¿Cuál es el número de emergencias en España?</label>
+    <select id="q2" name="q2">
+      <option value="">Selecciona una opción</option>
+      <option value="911">911</option>
+      <option value="112">112</option>
+      <option value="999">999</option>
+    </select>
+
+    <label for="q3">3. ¿Qué parte del cuerpo se comprime durante la RCP?</label>
+    <select id="q3" name="q3">
+      <option value="">Selecciona una opción</option>
+      <option value="pecho">Pecho</option>
+      <option value="abdomen">Abdomen</option>
+      <option value="piernas">Piernas</option>
+    </select>
+
+    <label for="q4">4. ¿Debes comprobar si la persona respira antes de empezar la RCP?</label>
+    <select id="q4" name="q4">
+      <option value="">Selecciona una opción</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+      <option value="solo si está consciente">Solo si está consciente</option>
+    </select>
+
+    <label for="q5">5. ¿Es útil usar un desfibrilador si está disponible?</label>
+    <select id="q5" name="q5">
+      <option value="">Selecciona una opción</option>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+      <option value="">Solo si hay médico</option>
+    </select>
+
+    <input type="submit" value="Enviar respuestas" />
+    <button type="button" id="resetBtn" onclick="reiniciarFormulario()">Reiniciar formulario</button>
+  </form>
+
+  <script>
+    const celebrationGif = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExajBsZTlpOWRkYzBwazdsZ2IzdjE3ZngxNmRjNXE0NDJmY3NsMzJnMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TgMFWvy7iPj5Ck7BZE/giphy.gif";
+    const failGif = "https://media1.tenor.com/m/-9HRJw0sJ_gAAAAC/skeleton-falling.gif";
+    const defaultGif = "https://media.tenor.com/Ou58OPjLMuMAAAAi/mivkbp-first-aid.gif";
+
+    document.getElementById("rcpForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const correctAnswers = {
+        q1: "reanimación cardiopulmonar",
+        q2: "112",
+        q3: "pecho",
+        q4: "si",
+        q5: "si"
+      };
+
+      let allCorrect = true;
+      for (let key in correctAnswers) {
+        const userAnswer = document.getElementById(key).value;
+        if (userAnswer !== correctAnswers[key]) {
+          allCorrect = false;
+          break;
+        }
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      const mainGif = document.getElementById("mainGif");
+      mainGif.src = allCorrect ? celebrationGif : failGif;
+
+      // Bloquear todos los campos excepto el botón de reinicio
+      const inputs = document.querySelectorAll("#rcpForm select, #rcpForm input[type='submit']");
+      inputs.forEach(input => input.disabled = true);
+    });
+
+    function reiniciarFormulario() {
+      document.getElementById("rcpForm").reset();
+      document.getElementById("mainGif").src = defaultGif;
+
+      const inputs = document.querySelectorAll("#rcpForm select, #rcpForm input[type='submit']");
+      inputs.forEach(input => input.disabled = false);
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
 </body>
 </html>
