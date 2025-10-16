@@ -1,166 +1,153 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Corazón Palpitante</title>
+    <title>Corazón Palpitante</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffa7a6; /* Fondo para contraste */
+        }
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #ffa7a6;
-      /* Fondo para contraste */
-    }
+        .corazon {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: latido 1.5s infinite;
+            cursor: pointer;
+            transition: opacity 1.5s ease;
+        }
 
-    .corazon {
-      position: absolute;
-      /*margin: auto;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;*/
-      width: 400px;
-      height: 400px;
-      background-color: red;
-      transform: rotate(-45deg);
-      animation: latido 1.5s infinite;
-      cursor: pointer;
-      transition: opacity 1.5s ease;
-    }
+        .corazon:before,
+        .corazon:after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: red;
+            border-radius: 100%;
+        }
 
+        .corazon:before {
+            top: -200px;
+            left: 0;
+        }
 
-    .corazon:before,
-    .corazon:after {
-      content: "";
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      background-color: red;
-      border-radius: 100%;
-    }
+        .corazon:after {
+            top: 0;
+            left: 200px;
+        }
 
-    .corazon:before {
-      top: -200px;
-      left: 0;
-    }
+        @keyframes latido {
+            0% {
+                transform: rotate(-45deg) scale(1);
+            }
+            50% {
+                transform: rotate(-45deg) scale(0.95);
+            }
+            100% {
+                transform: rotate(-45deg) scale(1);
+            }
+        }
 
-    .corazon:after {
-      top: 0;
-      left: 200px;
-    }
+        /* Cuando pasamos el puntero por encima */
+        .corazon:hover,
+        .corazon:hover::before,
+        .corazon:hover::after {
+            background-color: #8B0000; /* Rojo claro al pasar el ratón */
+        }
 
-    @keyframes latido {
-      0% {
-        transform: rotate(-45deg) scale(1);
-      }
+        /* Color rojo oscuro permanente tras el clic */
+        .rojo-oscuro,
+        .rojo-oscuro::before,
+        .rojo-oscuro::after {
+            background-color:  #e94949; /* Rojo oscuro */
+        }
 
-      50% {
-        transform: rotate(-45deg) scale(0.95);
-      }
+        /* Cuando hacemos clic en la caja */
+        .corazon:active {
+            animation: latido-grande 0.3s ease;
+        }
 
-      100% {
-        transform: rotate(-45deg) scale(1);
-      }
-    }
+        @keyframes latido-grande {
+            0% {
+                transform: rotate(-45deg) scale(1);
+            }
+            50% {
+                transform: rotate(-45deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(-45deg) scale(1);
+            }
+        }
 
-    .corazon:hover,
-    .corazon:hover::before,
-    .corazon:hover::after {
-      /cuando pasamos el puntero por encima/
-      background-color: rgb(182, 3, 3);
+        .latido-fuerte {
+            animation: latido-grande 0.3s ease;
+        }
 
-    }
+        /* Efecto de desaparecer */
+        .oculto {
+            opacity: 0;
+            pointer-events: none; /* Para que no se pueda volver a clicar */
+            animation: none; /* Corregido de 'nome' */
+        }
 
-    /* Cuando hacemos click en la caja */
-    .corazon:active {
-      animation: latido-grande 0.3s ease;
-    }
+        h1 {
+            color: white;
+            font-family: Arial, sans-serif;
+            margin-top: 40px;
+            opacity: 0;
+            font-size: 6rem; /* Mucho más grande */
+            text-align: center;
+            transition: opacity 2s ease, transform 1s ease;
+            transform: scale(0.5); /* Efecto zoom inicial */
+        }
 
-    @keyframes latido-grande {
-      0% {
-        transform: rotate(-45deg) scale(1);
-      }
-
-      50% {
-        transform: rotate(-45deg) scale(1.2);
-      }
-
-      100% {
-        transform: rotate(-45deg) scale(1);
-      }
-    }
-
-    .latido-fuerte {
-      animation: latido-grande 0.3s ease;
-    }
-    /* Efecto de desaparecer */
-     .oculto {
-      opacity: 0;
-      pointer-events: none; /* para que no se pueda volver a clicar */
-      animation: nome;
-      /*transform: scale(0.5);
-      transition: transform 2s ease, opacity 2s ease;*/
-    }
-
-h1 {
-      color: white;
-      font-family: Arial, sans-serif;
-      margin-top: 40px;
-      opacity: 0;
-      font-size: 6rem; /* mucho más grande */
-      text-align: center;
-      transition: opacity 2s ease, transform 1s ease;
-      transform: scale(0.5); /* efecto zoom inicial */
-    }
-
-h1.mostrar{
-  opacity: 1;
-  transform: scale(1);
-}
-
-
-  </style>
+        h1.mostrar {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
 </head>
-
 <body>
-
-  <div class="corazon"></div>
+    <div class="corazon"></div>
     <h1 id="mensaje">💖 ¡DIA INTERNACIONAL DEL RCP! 💖</h1>
-  
 
-  <script>
-    const corazon = document.querySelector('.corazon');
-    const mensaje = document.getElementById('mensaje');
-    let clics = 0;
+    <script>
+        const corazon = document.querySelector('.corazon');
+        const mensaje = document.getElementById('mensaje');
+        let clics = 0;
 
-    corazon.addEventListener('click', () => {
-      // Latido fuerte
-      corazon.classList.add('latido-fuerte');
-      setTimeout(() => corazon.classList.remove('latido-fuerte'), 300);
+        corazon.addEventListener('click', () => {
+            // Latido fuerte
+            corazon.classList.add('latido-fuerte');
+            setTimeout(() => corazon.classList.remove('latido-fuerte'), 300);
 
-      // Contar clics
-      clics++;
+            // Añadir color rojo oscuro permanente en el primer clic
+            corazon.classList.add('rojo-oscuro');
 
-      if (clics === 5) {
-        corazon.classList.add('oculto'); // Desaparece el corazón
+            // Contar clics
+            clics++;
 
-        // Mostrar texto
-        setTimeout(() => {
-          mensaje.classList.add('mostrar');
+            if (clics === 5) {
+                corazon.classList.add('oculto'); // Desaparece el corazón
 
-          // Redirigir después de 5 segundos
-          setTimeout(() => {
-            window.location.href = "rcp.html"; // <-- Cambia por la URL que quieras
-          }, 3000); // 5000ms = 5 segundos
-        }, 800); // retraso para que el corazón desaparezca primero
-      }
-    });
-  </script>
+                // Mostrar texto
+                setTimeout(() => {
+                    mensaje.classList.add('mostrar');
 
-  
+                    // Redirigir después de 3 segundos
+                    setTimeout(() => {
+                        window.location.href = "rcp.html"; // Cambia por la URL que quieras
+                    }, 3000); // 3000ms = 3 segundos
+                }, 800); // Retraso para que el corazón desaparezca primero
+            }
+        });
+    </script>
 </body>
-
 </html>
